@@ -1,0 +1,12 @@
+com/paymybuddy/api/ApiApplication.class
+com/paymybuddy/api/model/User.class
+com/paymybuddy/api/service/UserService.class
+com/paymybuddy/api/repository/TransactionRepository.class
+com/paymybuddy/api/model/ConnectionID.class
+com/paymybuddy/api/dto/UserDTO.class
+com/paymybuddy/api/repository/UserRepository.class
+com/paymybuddy/api/model/Connection.class
+com/paymybuddy/api/service/implementation/UserServiceImpl.class
+com/paymybuddy/api/model/Transaction.class
+com/paymybuddy/api/repository/ConnectionRepository.class
+com/paymybuddy/api/mapper/UserMapper.class

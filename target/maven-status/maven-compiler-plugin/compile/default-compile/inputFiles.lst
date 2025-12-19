@@ -1,0 +1,12 @@
+/Users/jon/Desktop/OC/projet 06/PayMyBuddy/src/main/java/com/paymybuddy/api/ApiApplication.java
+/Users/jon/Desktop/OC/projet 06/PayMyBuddy/src/main/java/com/paymybuddy/api/dto/UserDTO.java
+/Users/jon/Desktop/OC/projet 06/PayMyBuddy/src/main/java/com/paymybuddy/api/mapper/UserMapper.java
+/Users/jon/Desktop/OC/projet 06/PayMyBuddy/src/main/java/com/paymybuddy/api/model/Connection.java
+/Users/jon/Desktop/OC/projet 06/PayMyBuddy/src/main/java/com/paymybuddy/api/model/ConnectionID.java
+/Users/jon/Desktop/OC/projet 06/PayMyBuddy/src/main/java/com/paymybuddy/api/model/Transaction.java
+/Users/jon/Desktop/OC/projet 06/PayMyBuddy/src/main/java/com/paymybuddy/api/model/User.java
+/Users/jon/Desktop/OC/projet 06/PayMyBuddy/src/main/java/com/paymybuddy/api/repository/ConnectionRepository.java
+/Users/jon/Desktop/OC/projet 06/PayMyBuddy/src/main/java/com/paymybuddy/api/repository/TransactionRepository.java
+/Users/jon/Desktop/OC/projet 06/PayMyBuddy/src/main/java/com/paymybuddy/api/repository/UserRepository.java
+/Users/jon/Desktop/OC/projet 06/PayMyBuddy/src/main/java/com/paymybuddy/api/service/UserService.java
+/Users/jon/Desktop/OC/projet 06/PayMyBuddy/src/main/java/com/paymybuddy/api/service/implementation/UserServiceImpl.java
