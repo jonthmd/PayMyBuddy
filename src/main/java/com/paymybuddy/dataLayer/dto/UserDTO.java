@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 /**
  * DTO used to represent a user by just exposing id and email.
@@ -18,5 +19,6 @@ public class UserDTO {
     private String username;
     private String email;
     private BigDecimal balance;
+    private Set<ConnectionDTO> connections;
 
 }

@@ -8,7 +8,6 @@ import com.paymybuddy.dataLayer.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * Implementations of the user service interface.
@@ -27,24 +26,13 @@ public class UserServiceImpl implements UserService {
 
     /**
      * @param userDTO Mapped object containing the created user details.
-     * @return UserDTO, the created user.
+     * @return The created user.
      */
     @Override
     public UserDTO createUser(UserDTO userDTO) {
         User user = userMapper.userDTOToUser(userDTO);
         userRepository.save(user);
         return userMapper.userToUserDTO(user);
-    }
-
-    /**
-     * @return All users on the database.
-     */
-    @Override
-    public List<UserDTO> getAllUsers() {
-        return userRepository.findAll()
-                .stream()
-                .map(userMapper::userToUserDTO)
-                .toList();
     }
 
     /**
@@ -63,7 +51,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * @param id Unique identifier of the user.
-     * @return  The user searched by the specific id.
+     * @return The user searched by the specific id.
      */
     @Override
     public UserDTO getUserById(Long id) {
@@ -71,7 +59,7 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * @param id
+     * @param id Unique identifier of the user.
      */
     @Override
     public void deleteUser(Long id) {
@@ -79,12 +67,12 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * @param userDTO
-     * @param wallet
-     * @return
+     * @param userDTO Mapped object containing the created user details.
+     * @param balance Balance of the wallet user.
+     * @return The user with the updated balance.
      */
     @Override
-    public UserDTO walletUpdate(UserDTO userDTO, BigDecimal wallet) {
+    public UserDTO balanceUpdate(UserDTO userDTO, BigDecimal balance) {
         return null;
     }
 }
