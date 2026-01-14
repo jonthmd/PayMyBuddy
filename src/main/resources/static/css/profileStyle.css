@@ -1,0 +1,75 @@
+body {
+  font-family: "Inter", sans-serif;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  height: 164px;
+  width: 90%;
+  align-items: center;
+  margin: auto;
+  margin-bottom: 100px;
+}
+
+.menu {
+  display: flex;
+  gap: 100px;
+}
+
+.profile {
+  color: #207fee;
+}
+
+span {
+  margin-right: auto;
+}
+
+a {
+  justify-content: flex-end;
+  text-decoration: none;
+  color: #000000;
+}
+
+a:hover {
+  color: #207fee;
+}
+
+main {
+margin: auto;
+display: flex;
+justify-content: center;
+align-items: center;
+margin-left: 200px;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: 1fr 300px; /* largeur fixe pour les labels */
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 30px;
+}
+
+.username,
+.mail,
+.password {
+  font-size: 1.1em;
+  border: none;
+  height: 65px;
+}
+
+.button {
+  width: 160px;
+  height: 60px;
+  border-radius: 8px;
+  background-color: #F69F1D;
+  border: 1px solid #F69F1D;
+  color: #ffffff;
+  font-size: 1.2em;
+  margin-top: 30px;
+}
+
+.button:active {
+  opacity: 50%;
+}
