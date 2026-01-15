@@ -26,12 +26,15 @@ public class SpringSecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
-        return http.authorizeHttpRequests(auth ->{
-            auth.requestMatchers("/admin").hasRole("ADMIN");
-            auth.requestMatchers("/user").hasRole("USER");
-            auth.anyRequest().authenticated();
-        }).formLogin(Customizer.withDefaults()).build();
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        return http.authorizeHttpRequests(auth -> {
+//            auth.requestMatchers("/admin").hasRole("ADMIN");
+//            auth.requestMatchers("/user").hasRole("USER");
+                    auth.requestMatchers("/login", "/register", "/css/**", "/js/**", "/images/**").permitAll();
+                    auth.anyRequest().authenticated();
+                }).formLogin(form -> form.loginPage("/login")
+                        .permitAll())
+                .build();
     }
 
 //    @Bean
@@ -48,14 +51,10 @@ public class SpringSecurityConfig {
 //    }
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder) {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
         authenticationManagerBuilder.userDetailsService(customUserDetailsService).passwordEncoder(bCryptPasswordEncoder);
         return authenticationManagerBuilder.build();
     }
+
 }

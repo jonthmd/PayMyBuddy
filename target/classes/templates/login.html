@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Sign In</title>
-    <link href="../static/css/signInUpStyle.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/loginRegisterStyle.css}">
 </head>
 <body>
 <header>
@@ -11,25 +11,25 @@
 </header>
 <main>
     <section>
-        <form class="form" action="" method="post">
+        <form class="form" th:action="@{/login}" method="post">
             <div class="title">
                 <h2>Pay My Buddy</h2>
             </div>
             <div>
                 <label>
-                    <input class="mail" type="text" name="mail" placeholder="Mail" required>
+                    <input class="mail" type="text" name="username" placeholder="Mail" required>
                 </label>
             </div>
             <div>
                 <label>
-                    <input class="password" type="password" name="motDePasse" placeholder="Mot de passe" required>
+                    <input class="password" type="password" name="password" placeholder="Mot de passe" required>
                 </label>
             </div>
             <div>
                 <input class="submit" type="submit" value="Se connecter">
             </div>
             <p>
-                <a href="signUp.html">Créer un compte ?</a>
+                <a th:href="@{/register}">Créer un compte ?</a>
             </p>
         </form>
     </section>
