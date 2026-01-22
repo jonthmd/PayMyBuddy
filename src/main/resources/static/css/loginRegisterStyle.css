@@ -54,11 +54,27 @@ form {
 opacity: 0.5;
 }
 
+.submit:hover {
+    background-color: #1b6fd1;
+    }
+
 tr {
   border: 1px solid #e0e0e0;
 }
 
 p {
 text-align: center;
+}
+
+.error {
+display:flex;
+margin:auto;
+color: red;
+}
+
+.logout {
+display:flex;
+margin:auto;
+color: green;
 }
 

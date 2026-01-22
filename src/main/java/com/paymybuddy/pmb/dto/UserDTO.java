@@ -1,0 +1,24 @@
+package com.paymybuddy.pmb.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
+import java.util.Set;
+
+/**
+ * DTO used to represent a user by just exposing id and email.
+ */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class UserDTO {
+
+    private Long id;
+    private String username;
+    private String email;
+    private BigDecimal balance;
+    private Set<ConnectionDTO> connections;
+
+}

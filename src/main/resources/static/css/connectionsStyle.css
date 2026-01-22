@@ -65,3 +65,7 @@ a:hover {
 .button:active {
   opacity: 50%;
 }
+
+.button:hover {
+  background-color: #e0890f;
+}

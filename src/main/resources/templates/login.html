@@ -15,6 +15,10 @@
             <div class="title">
                 <h2>Pay My Buddy</h2>
             </div>
+            <div class="error" th:if="${param.error}">
+                L'identifiant ou le mot de passe est incorrect.</div>
+            <div class="logout" th:if="${param.logout}">
+                Déconnexion réalisée avec succès.</div>
             <div>
                 <label>
                     <input class="mail" type="text" name="username" placeholder="Mail" required>

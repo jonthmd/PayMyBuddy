@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.paymybuddy</groupId>
-	<artifactId>dataLayer</artifactId>
+	<artifactId>PMB</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>dataLayer</name>
 	<description>Data Layer for Pay My Buddy.</description>
@@ -95,6 +95,12 @@
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct-processor</artifactId>
 			<version>1.6.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+			<version>4.0.1</version>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 

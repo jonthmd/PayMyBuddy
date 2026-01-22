@@ -73,3 +73,7 @@ margin-left: 200px;
 .button:active {
   opacity: 50%;
 }
+
+.button:hover {
+  background-color: #e0890f;
+}

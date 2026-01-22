@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Transaction</title>
+    <link th:href="@{/css/dashboardStyle.css}" rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <ul class="navbar">
+            <span>Pay My Buddy</span>
+            <div class="menu">
+                <a class="transfer" th:href="@{/dashboard}">Transférer</a>
+                <a href="#">Profil</a>
+                <a href="#">Ajouter relation</a>
+                <a href="#">Se déconnecter</a>
+            </div>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <section class="balance">
+        <div class="value">
+            <div> Solde disponible:</div>
+            <div th:text="${user.balance}">0 €</div>
+        </div>
+        <div>
+            <label>
+                <input class="amount" type="number" min="0" max="500" step="10" value="0">
+                <span class="currency">€</span>
+            </label>
+        </div>
+        <div>
+
+            <form th:action="@{/dashboard}" method="post">
+                <div class="button">
+                    <input class="deposit" type="submit" value="Recharger">
+                    <input class="withdrawal" type="submit" value="Transférer">
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section>
+        <form th:action="@{/dashboard}" method="post">
+            <div>
+                <label for="connection"></label>
+                <select name="connection" id="connection" required>
+                    <option value="default" selected disabled> Sélectionner une relation</option>
+                    <option th:each="connection : ${connections}"
+                            th:value="${connection.friendId}"
+                            th:text="${connection.friendUsername}"> user A
+                    </option>
+                </select>
+            </div>
+            <div>
+                <label>
+                    <input class="description" type="text" field="*{description}" placeholder="Description"
+                           maxlength="35">
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input class="price" type="number" field="*{amount}" min="0" max="500" step="10" value="0">
+                    <span class="currency">€</span>
+                </label>
+            </div>
+            <div>
+                <input class="submit" type="submit" value="Payer">
+            </div>
+        </form>
+    </section>
+
+    <section class="view">
+        <div>
+            <h2>Mes transactions</h2>
+        </div>
+        <table>
+            <thead>
+            <tr class="header">
+                <th>Relations</th>
+                <th>Description</th>
+                <th class="right">Montant</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="transaction : ${transactions}">
+                <td th:text="${transaction.relation}"></td>
+                <td th:text="${transaction.description}"></td>
+                <td th:text="${transaction.signedAmount}"></td>
+            </tr>
+
+            </tbody>
+        </table>
+
+    </section>
+
+</main>
+
+</body>
+
+</html>
