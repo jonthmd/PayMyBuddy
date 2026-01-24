@@ -2,6 +2,7 @@ package com.paymybuddy.pmb.service;
 
 import com.paymybuddy.pmb.dto.TransactionDTO;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public interface TransactionService {
 
-    TransactionDTO createTransaction(TransactionDTO transactionDTO);
+    void createTransaction(BigDecimal amount, String senderUsername, String receiverUsername);
     List<TransactionDTO> getTransactionsByUsername(String username);
 
 }

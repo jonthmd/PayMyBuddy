@@ -17,7 +17,7 @@
                 <a class="transfer" th:href="@{/dashboard}">Transférer</a>
                 <a href="#">Profil</a>
                 <a href="#">Ajouter relation</a>
-                <a href="#">Se déconnecter</a>
+                <a th:href="@{/logout}">Se déconnecter</a>
             </div>
         </ul>
     </nav>
@@ -28,7 +28,7 @@
     <section class="balance">
         <div class="value">
             <div> Solde disponible:</div>
-            <div th:text="${user.balance}">0 €</div>
+            <div th:text="${user.balance} + '€'">0 €</div>
         </div>
         <div>
             <label>
@@ -48,7 +48,7 @@
     </section>
 
     <section>
-        <form th:action="@{/dashboard}" method="post">
+        <form th:action="@{/transaction}" method="post" th:object="${transaction}">
             <div>
                 <label for="connection"></label>
                 <select name="connection" id="connection" required>
@@ -61,13 +61,13 @@
             </div>
             <div>
                 <label>
-                    <input class="description" type="text" field="*{description}" placeholder="Description"
+                    <input class="description" type="text" th:field="*{description}" placeholder="Description"
                            maxlength="35">
                 </label>
             </div>
             <div>
                 <label>
-                    <input class="price" type="number" field="*{amount}" min="0" max="500" step="10" value="0">
+                    <input class="price" type="number" th:field="*{amount}" min="0" max="500" step="10" value="0">
                     <span class="currency">€</span>
                 </label>
             </div>

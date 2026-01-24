@@ -23,4 +23,5 @@ public class TransactionDTO {
     private UserDTO receiver;
     private String relation;
     private String signedAmount;
+
 }
