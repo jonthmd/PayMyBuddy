@@ -1,9 +1,8 @@
 package com.paymybuddy.pmb.controller;
 
-import com.paymybuddy.pmb.dto.ConnectionDTO;
-import com.paymybuddy.pmb.dto.TransactionDTO;
-import com.paymybuddy.pmb.dto.TransactionSubmitDTO;
-import com.paymybuddy.pmb.dto.UserDTO;
+import com.paymybuddy.pmb.dto.*;
+import com.paymybuddy.pmb.exceptions.InsufficientBalanceException;
+import com.paymybuddy.pmb.exceptions.InvalidAmountException;
 import com.paymybuddy.pmb.service.TransactionService;
 import com.paymybuddy.pmb.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.util.List;
@@ -38,13 +38,54 @@ public class DashboardController {
         model.addAttribute("connections", connectionDTOSet);
         model.addAttribute("transactions", transactionDTOList);
         model.addAttribute("transactionSubmitDTO", new TransactionSubmitDTO());
+        model.addAttribute("balance", new WalletDTO());
         return "dashboard";
-        }
+    }
 
     @PostMapping("/transaction")
-    public String TransactionSubmit(@ModelAttribute("transaction") TransactionSubmitDTO transactionSubmitDTO, Principal principal) {
-        transactionService.createTransaction(transactionSubmitDTO.getAmount(), principal.getName(), transactionSubmitDTO.getReceiver());
+    public String TransactionSubmit(@ModelAttribute("transaction") TransactionSubmitDTO transactionSubmitDTO, Principal principal, Model model, RedirectAttributes redirectAttributes) {
+        UserDTO userDTO = userService.getUserByUsername(principal.getName());
+        Set<ConnectionDTO> connectionDTOSet = userDTO.getConnections();
+        List<TransactionDTO> transactionDTOList = transactionService.getTransactionsByUsername(principal.getName());
+        try {
+            transactionService.createTransaction(transactionSubmitDTO.getAmount(), principal.getName(), transactionSubmitDTO.getReceiver(), transactionSubmitDTO.getDescription());
+        } catch (InsufficientBalanceException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            model.addAttribute("user", userDTO);
+            model.addAttribute("connections", connectionDTOSet);
+            model.addAttribute("transactions", transactionDTOList);
+            model.addAttribute("transactionSubmitDTO", new TransactionSubmitDTO());
+            model.addAttribute("balance", new WalletDTO());
+            return "redirect:/dashboard";
+
+        } catch (InvalidAmountException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            model.addAttribute("user", userDTO);
+            model.addAttribute("connections", connectionDTOSet);
+            model.addAttribute("transactions", transactionDTOList);
+            model.addAttribute("transactionSubmitDTO", new TransactionSubmitDTO());
+            model.addAttribute("balance", new WalletDTO());
+            return "redirect:/dashboard";
+
+        }
         return "redirect:/dashboard";
     }
 
+    @PostMapping("/balance")
+    public String depositBalance(@ModelAttribute("balance") WalletDTO walletDTO, Principal principal, Model model, RedirectAttributes redirectAttributes) {
+        UserDTO userDTO = userService.getUserByUsername(principal.getName());
+        Set<ConnectionDTO> connectionDTOSet = userDTO.getConnections();
+        List<TransactionDTO> transactionDTOList = transactionService.getTransactionsByUsername(principal.getName());
+        try {
+            transactionService.depositBalance(principal.getName(), walletDTO.getAmount());
+        } catch (InvalidAmountException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            model.addAttribute("user", userDTO);
+            model.addAttribute("connections", connectionDTOSet);
+            model.addAttribute("transactions", transactionDTOList);
+            model.addAttribute("transactionSubmitDTO", new TransactionSubmitDTO());
+            model.addAttribute("balance", new WalletDTO());
+        }
+        return "redirect:/dashboard";
+    }
 }

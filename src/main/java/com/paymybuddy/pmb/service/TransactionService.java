@@ -10,7 +10,8 @@ import java.util.List;
  */
 public interface TransactionService {
 
-    void createTransaction(BigDecimal amount, String senderUsername, String receiverUsername);
+    void depositBalance(String username, BigDecimal amount);
+    void createTransaction(BigDecimal amount, String senderUsername, String receiverUsername, String description);
     List<TransactionDTO> getTransactionsByUsername(String username);
 
 }

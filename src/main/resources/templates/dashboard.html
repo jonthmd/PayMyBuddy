@@ -25,39 +25,45 @@
 
 <main>
 
-    <section class="balance">
-        <div class="value">
-            <div> Solde disponible:</div>
-            <div th:text="${user.balance} + '€'">0 €</div>
+    <section >
+
+            <form class="balance" th:action="@{/balance}" method="post" th:object="${balance}">
+
+            <div class="value">
+            <p> Solde disponible:</p>
+            <p th:text="${user.balance} + '€'">0 €</p>
         </div>
-        <div>
+
+            <div>
             <label>
-                <input class="amount" type="number" min="0" max="500" step="10" value="0">
+                <input class="amount" th:field="*{amount}" type="number" min="0" max="500" step="10" value="0">
                 <span class="currency">€</span>
             </label>
         </div>
-        <div>
-
-            <form th:action="@{/dashboard}" method="post">
-                <div class="button">
+        <div class="button">
                     <input class="deposit" type="submit" value="Recharger">
-                    <input class="withdrawal" type="submit" value="Transférer">
-                </div>
-            </form>
         </div>
+            </form>
+
+            <div class="error" th:if="${error}" th:text="${error}"></div>
+            <div class="error" th:if="${errorDeposit}" th:text="${errorDeposit}"></div>
+
+
     </section>
 
     <section>
-        <form th:action="@{/transaction}" method="post" th:object="${transaction}">
+        <form th:action="@{/transaction}" method="post" th:object="${transactionSubmitDTO}">
             <div>
-                <label for="connection"></label>
-                <select name="connection" id="connection" required>
-                    <option value="default" selected disabled> Sélectionner une relation</option>
-                    <option th:each="connection : ${connections}"
-                            th:value="${connection.friendId}"
-                            th:text="${connection.friendUsername}"> user A
-                    </option>
-                </select>
+                <label th:for="*{receiver}"></label>
+                <label>
+                    <select th:field="*{receiver}" required>
+                        <option value="" selected hidden> Sélectionner une relation</option>
+                        <option th:each="connection : ${connections}"
+                                th:value="${connection.friendUsername}"
+                                th:text="${connection.friendUsername}"> user A
+                        </option>
+                    </select>
+                </label>
             </div>
             <div>
                 <label>
@@ -85,15 +91,15 @@
             <thead>
             <tr class="header">
                 <th>Relations</th>
-                <th>Description</th>
+                <th class="middle">Description</th>
                 <th class="right">Montant</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="transaction : ${transactions}">
                 <td th:text="${transaction.relation}"></td>
-                <td th:text="${transaction.description}"></td>
-                <td th:text="${transaction.signedAmount}"></td>
+                <td class="middle" th:text="${transaction.description}"></td>
+                <td class="right" th:text="${transaction.signedAmount}"></td>
             </tr>
             </tbody>
         </table>
