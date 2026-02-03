@@ -33,7 +33,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     /**
      * @param username The username of the current user.
-     * @param amount The amount to added to the balance.
+     * @param amount   The amount to added to the balance.
      */
     @Override
     public void depositBalance(String username, BigDecimal amount) {
@@ -62,10 +62,10 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     /**
-     * @param amount The amount of the transaction to be transferred.
-     * @param senderUsername The username of the sender user.
+     * @param amount           The amount of the transaction to be transferred.
+     * @param senderUsername   The username of the sender user.
      * @param receiverUsername The username of the receiver user.
-     * @param description The description of the transaction.
+     * @param description      The description of the transaction.
      */
     @Override
     public void createTransaction(BigDecimal amount, String senderUsername, String receiverUsername, String description) {
@@ -115,11 +115,11 @@ public class TransactionServiceImpl implements TransactionService {
                     if (transaction.getSender().getUsername().equals(username) && transaction.getReceiver().getUsername().equals(username)) {
                         transactionDTO.setSignedAmount("+ " + transaction.getAmount() + "€");
                         transactionDTO.setRelation("-");
+                    } else if (transaction.getReceiver().getUsername().equals(username)) {
+                        transactionDTO.setSignedAmount("+ " + transaction.getAmount() + "€");
+                        transactionDTO.setRelation(transaction.getSender().getUsername());
                     } else if (transaction.getSender().getUsername().equals(username)) {
                         transactionDTO.setSignedAmount("- " + transaction.getAmount() + "€");
-                        transactionDTO.setRelation(transaction.getReceiver().getUsername());
-                    } else {
-                        transactionDTO.setSignedAmount("+ " + transaction.getAmount() + "€");
                         transactionDTO.setRelation(transaction.getReceiver().getUsername());
                     }
 

@@ -16,7 +16,7 @@
             <div class="menu">
                 <a class="transfer" th:href="@{/dashboard}">Transférer</a>
                 <a href="#">Profil</a>
-                <a href="#">Ajouter relation</a>
+                <a th:href="@{/connections}">Ajouter relation</a>
                 <a th:href="@{/logout}">Se déconnecter</a>
             </div>
         </ul>
@@ -52,7 +52,7 @@
     </section>
 
     <section>
-        <form th:action="@{/transaction}" method="post" th:object="${transactionSubmitDTO}">
+        <form th:action="@{/transaction}" method="post" th:object="${submitTransactionDTO}">
             <div>
                 <label th:for="*{receiver}"></label>
                 <label>

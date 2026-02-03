@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransactionSubmitDTO {
+public class SubmitTransactionDTO {
 
     private String receiver;
     private String description;

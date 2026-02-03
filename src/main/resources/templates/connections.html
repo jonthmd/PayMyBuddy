@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Connections</title>
-    <link rel="stylesheet" href="../static/css/connectionsStyle.css">
+    <link rel="stylesheet" th:href="@{/css/connectionsStyle.css}">
 </head>
 <body>
 
@@ -13,9 +13,9 @@
             <span>Pay My Buddy</span>
             <div class="menu">
                 <a th:href="@{/dashboard}">Transférer</a>
-                <a href="#">Profil</a>
-                <a class="connection" href="#">Ajouter relation</a>
-                <a href="#">Se déconnecter</a>
+                <a th:href="#">Profil</a>
+                <a th:href="@{/connections}">Ajouter relation</a>
+                <a th:href="@{/logout}">Se déconnecter</a>
             </div>
         </ul>
     </nav>
