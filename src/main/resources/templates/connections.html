@@ -13,7 +13,7 @@
             <span>Pay My Buddy</span>
             <div class="menu">
                 <a th:href="@{/dashboard}">Transférer</a>
-                <a th:href="#">Profil</a>
+                <a href="#">Profil</a>
                 <a th:href="@{/connections}">Ajouter relation</a>
                 <a th:href="@{/logout}">Se déconnecter</a>
             </div>
@@ -23,14 +23,11 @@
 
 <main>
     <section class="add">
-        <form action="" method="post">
-        <p>
-            <label>Chercher une relation</label><br>
-            <label>
-                <input class="mail" type="email" name="mail" placeholder="Saisir une adresse mail">
+        <form th:action="@{/connections}" method="post" th:object="${addConnectionDTO}">
+            <label>Chercher une relation<br>
+                <input class="mail" type="text" th:field="*{email}" placeholder="Saisir une adresse mail">
                 <input class="button" type="submit" value="Ajouter">
             </label>
-        </p>
             </form>
     </section>
 </main>

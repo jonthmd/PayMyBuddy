@@ -1,7 +1,6 @@
 package com.paymybuddy.pmb.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,7 +11,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "connections")
 public class Connection {
@@ -29,5 +27,11 @@ public class Connection {
     @MapsId("friendId")
     @JoinColumn(name = "friend_id")
     private User friend;
+
+    public Connection(User user, User friend) {
+        this.user = user;
+        this.friend = friend;
+        this.id = new ConnectionID(user.getId(), friend.getId());
+    }
 
 }
