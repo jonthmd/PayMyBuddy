@@ -39,6 +39,7 @@ public class DashboardController {
         model.addAttribute("transactions", transactionDTOList);
         model.addAttribute("submitTransactionDTO", new SubmitTransactionDTO());
         model.addAttribute("balance", new WalletDTO());
+        log.info("Dashboard view");
         return "dashboard";
     }
 
@@ -49,7 +50,7 @@ public class DashboardController {
         List<TransactionDTO> transactionDTOList = transactionService.getTransactionsByUsername(principal.getName());
         try {
             transactionService.createTransaction(submitTransactionDTO.getAmount(), principal.getName(), submitTransactionDTO.getReceiver(), submitTransactionDTO.getDescription());
-        } catch (InsufficientBalanceException e) {
+        } catch (InsufficientBalanceException | InvalidAmountException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
             model.addAttribute("user", userDTO);
             model.addAttribute("connections", connectionDTOSet);
@@ -57,16 +58,6 @@ public class DashboardController {
             model.addAttribute("submitTransactionDTO", new SubmitTransactionDTO());
             model.addAttribute("balance", new WalletDTO());
             return "redirect:/dashboard";
-
-        } catch (InvalidAmountException e) {
-            redirectAttributes.addFlashAttribute("error", e.getMessage());
-            model.addAttribute("user", userDTO);
-            model.addAttribute("connections", connectionDTOSet);
-            model.addAttribute("transactions", transactionDTOList);
-            model.addAttribute("submitTransactionDTO", new SubmitTransactionDTO());
-            model.addAttribute("balance", new WalletDTO());
-            return "redirect:/dashboard";
-
         }
         return "redirect:/dashboard";
     }

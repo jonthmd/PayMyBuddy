@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link  rel="stylesheet" th:href="@{/css/loginRegisterStyle.css}">
+</head>
+<body>
+<header>
+
+</header>
+<main>
+    <section>
+        <form class="form" th:action="@{/register}" th:object="${user}" method="post">
+            <div class="title">
+                <h2>Pay My Buddy</h2>
+            </div>
+            <div class="error" th:if="${error}" th:text="${error}"></div>
+            <div>
+                <label>
+                    <input class="username" type="text" th:field="*{username}" placeholder="Username" required autofocus>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input class="mail" type="text" th:field="*{email}" placeholder="Mail" required>
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input class="password" type="password" th:field="*{password}" placeholder="Mot de passe" required>
+                </label>
+            </div>
+            <div>
+                <input class="submit" type="submit" value="S'inscrire">
+            </div>
+            <p>
+                <a th:href="@{/login}">Déjà un compte ?</a>
+            </p>
+        </form>
+    </section>
+</main>
+</body>

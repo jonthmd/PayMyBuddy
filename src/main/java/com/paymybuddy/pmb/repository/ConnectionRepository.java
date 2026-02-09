@@ -1,6 +1,7 @@
 package com.paymybuddy.pmb.repository;
 
 import com.paymybuddy.pmb.model.Connection;
+import com.paymybuddy.pmb.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +10,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ConnectionRepository extends JpaRepository<Connection, Long> {
+    boolean existsByUserAndFriend(User user, User friend);
 }
