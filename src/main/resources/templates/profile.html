@@ -15,7 +15,12 @@
                 <a th:href="@{/dashboard}">Transférer</a>
                 <a class="profile" th:href="@{/profile}">Profil</a>
                 <a th:href="@{/connections}">Ajouter relation</a>
-                <a th:href="@{/logout}">Se déconnecter</a>
+                <form th:action="@{/logout}" method="post">
+                    <input type="hidden"
+                           th:name="${_csrf.parameterName}"
+                           th:value="${_csrf.token}">
+                    <button type="submit" class="logout">Se déconnecter</button>
+                </form>
             </div>
         </ul>
     </nav>
@@ -38,7 +43,8 @@
             <div class="field">
                 <label for="password">Mot de passe</label>
                 <div class="password">
-                    <input class="password" type="password" id="password" th:field="*{password}" placeholder="mot de passe">
+                    <input class="password" type="password" id="password" th:field="*{password}"
+                           placeholder="mot de passe">
                     <input class="button" type="submit" value="Modifier">
                 </div>
             </div>
@@ -46,7 +52,8 @@
         </form>
         <div>
 
-            <br><div class="message" th:if="${message}" th:text="${message}"></div>
+            <br>
+            <div class="message" th:if="${message}" th:text="${message}"></div>
             <div class="error" th:if="${error}" th:text="${error}"></div>
 
         </div>

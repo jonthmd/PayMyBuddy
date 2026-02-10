@@ -15,7 +15,12 @@
                 <a th:href="@{/dashboard}">Transférer</a>
                 <a th:href="@{/profile}">Profil</a>
                 <a class="connection" th:href="@{/connections}">Ajouter relation</a>
-                <a th:href="@{/logout}">Se déconnecter</a>
+                <form th:action="@{/logout}" method="post" style="display:inline">
+                    <input type="hidden"
+                           th:name="${_csrf.parameterName}"
+                           th:value="${_csrf.token}">
+                    <button type="submit" class="logout">Se déconnecter</button>
+                </form>
             </div>
         </ul>
     </nav>
@@ -28,11 +33,13 @@
                 <input class="mail" type="text" th:field="*{email}" placeholder="Saisir une adresse mail">
                 <input class="button" type="submit" value="Ajouter">
             </label>
-            </form>
+        </form>
 
     </section>
-    <br><div class="error" th:if="${error}" th:text="${error}"></div>
-    <br><div class="message" th:if="${message}" th:text="${message}"></div>
+    <br>
+    <div class="error" th:if="${error}" th:text="${error}"></div>
+    <br>
+    <div class="message" th:if="${message}" th:text="${message}"></div>
 
 </main>
 </body>

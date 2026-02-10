@@ -17,7 +17,12 @@
                 <a class="transfer" th:href="@{/dashboard}">Transférer</a>
                 <a th:href="@{/profile}">Profil</a>
                 <a th:href="@{/connections}">Ajouter relation</a>
-                <a th:href="@{/logout}">Se déconnecter</a>
+                <form th:action="@{/logout}" method="post">
+                    <input type="hidden"
+                           th:name="${_csrf.parameterName}"
+                           th:value="${_csrf.token}">
+                    <button type="submit" class="logout">Se déconnecter</button>
+                </form>
             </div>
         </ul>
     </nav>
@@ -25,27 +30,27 @@
 
 <main>
 
-    <section >
+    <section>
 
-            <form class="balance" th:action="@{/balance}" method="post" th:object="${balance}">
+        <form class="balance" th:action="@{/balance}" method="post" th:object="${balance}">
 
             <div class="value">
-            <p> Solde disponible:</p>
-            <p th:text="${user.balance} + '€'">0 €</p>
-        </div>
+                <p> Solde disponible:</p>
+                <p th:text="${user.balance} + '€'">0 €</p>
+            </div>
 
             <div>
-            <label>
-                <input class="amount" th:field="*{amount}" type="number" min="0" max="500" step="10" value="0">
-                <span class="currency">€</span>
-            </label>
-        </div>
-        <div class="button">
-                    <input class="deposit" type="submit" value="Recharger">
-        </div>
-            </form>
+                <label>
+                    <input class="amount" th:field="*{amount}" type="number" min="0" max="500" step="10" value="0">
+                    <span class="currency">€</span>
+                </label>
+            </div>
+            <div class="button">
+                <input class="deposit" type="submit" value="Recharger">
+            </div>
+        </form>
 
-            <div class="error" th:if="${error}" th:text="${error}"></div>
+        <div class="error" th:if="${error}" th:text="${error}"></div>
 
 
     </section>

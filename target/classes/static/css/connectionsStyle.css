@@ -11,6 +11,17 @@ body {
   margin: auto;
 }
 
+.logout {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+}
+
+.logout:hover {
+  color: #207fee;
+}
+
 .menu {
   display: flex;
   gap: 100px;
