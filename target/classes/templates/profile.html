@@ -27,12 +27,12 @@
 
             <div class="field">
                 <label for="username">Username</label>
-                <input class="username" type="text" id="username" name="username" placeholder="@username" disabled>
+                <input class="username" type="text" id="username" th:value="${profileDTO.username}" disabled>
             </div>
 
             <div class="field">
                 <label for="mail">Mail</label>
-                <input class="mail" type="text" id="mail" name="mail" placeholder="nom@domain.com" disabled>
+                <input class="mail" type="text" id="mail" th:value="${profileDTO.email}" disabled>
             </div>
 
             <div class="field">
@@ -47,7 +47,7 @@
         <div>
 
             <br><div class="message" th:if="${message}" th:text="${message}"></div>
-            <br><div class="error" th:if="${error}" th:text="${error}"></div>
+            <div class="error" th:if="${error}" th:text="${error}"></div>
 
         </div>
     </section>

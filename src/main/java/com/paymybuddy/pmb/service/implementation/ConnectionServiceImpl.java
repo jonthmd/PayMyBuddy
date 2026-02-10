@@ -46,6 +46,5 @@ public class ConnectionServiceImpl implements ConnectionService {
 
         Connection connection = new Connection(user, friend);
         connectionRepository.save(connection);
-
     }
 }

@@ -31,25 +31,32 @@ public class DashboardController {
 
     @GetMapping("/dashboard")
     public String dashboard(Model model, Principal principal) {
+
         UserDTO userDTO = userService.getUserByUsername(principal.getName());
         Set<ConnectionDTO> connectionDTOSet = userDTO.getConnections();
         List<TransactionDTO> transactionDTOList = transactionService.getTransactionsByUsername(principal.getName());
+
         model.addAttribute("user", userDTO);
         model.addAttribute("connections", connectionDTOSet);
         model.addAttribute("transactions", transactionDTOList);
         model.addAttribute("submitTransactionDTO", new SubmitTransactionDTO());
         model.addAttribute("balance", new WalletDTO());
+
         log.info("Dashboard view");
+
         return "dashboard";
     }
 
     @PostMapping("/transaction")
     public String submitTransaction(@ModelAttribute("transaction") SubmitTransactionDTO submitTransactionDTO, Principal principal, Model model, RedirectAttributes redirectAttributes) {
+
         UserDTO userDTO = userService.getUserByUsername(principal.getName());
         Set<ConnectionDTO> connectionDTOSet = userDTO.getConnections();
         List<TransactionDTO> transactionDTOList = transactionService.getTransactionsByUsername(principal.getName());
+
         try {
             transactionService.createTransaction(submitTransactionDTO.getAmount(), principal.getName(), submitTransactionDTO.getReceiver(), submitTransactionDTO.getDescription());
+
         } catch (InsufficientBalanceException | InvalidAmountException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
             model.addAttribute("user", userDTO);
@@ -57,18 +64,21 @@ public class DashboardController {
             model.addAttribute("transactions", transactionDTOList);
             model.addAttribute("submitTransactionDTO", new SubmitTransactionDTO());
             model.addAttribute("balance", new WalletDTO());
-            return "redirect:/dashboard";
         }
+
         return "redirect:/dashboard";
     }
 
     @PostMapping("/balance")
     public String depositBalance(@ModelAttribute("balance") WalletDTO walletDTO, Principal principal, Model model, RedirectAttributes redirectAttributes) {
+
         UserDTO userDTO = userService.getUserByUsername(principal.getName());
         Set<ConnectionDTO> connectionDTOSet = userDTO.getConnections();
         List<TransactionDTO> transactionDTOList = transactionService.getTransactionsByUsername(principal.getName());
+
         try {
             transactionService.depositBalance(principal.getName(), walletDTO.getAmount());
+
         } catch (InvalidAmountException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
             model.addAttribute("user", userDTO);
@@ -77,6 +87,7 @@ public class DashboardController {
             model.addAttribute("submitTransactionDTO", new SubmitTransactionDTO());
             model.addAttribute("balance", new WalletDTO());
         }
+
         return "redirect:/dashboard";
     }
 }

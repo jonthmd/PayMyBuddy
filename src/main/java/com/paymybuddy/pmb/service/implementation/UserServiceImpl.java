@@ -33,12 +33,15 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public void createUser(RegisterDTO registerDTO) {
+
             String password = bCryptPasswordEncoder.encode(registerDTO.getPassword());
+
             User user = new User();
             user.setUsername(registerDTO.getUsername());
             user.setEmail(registerDTO.getEmail());
             user.setPassword(password);
             user.setBalance(BigDecimal.ZERO);
+
             userRepository.save(user);
     }
 
@@ -48,6 +51,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserDTO getUserByUsername(String username) {
+
         User user = userRepository.findByUsername(username);
         UserDTO userDTO = userMapper.userToUserDTO(user);
 
@@ -56,9 +60,10 @@ public class UserServiceImpl implements UserService {
                     User friend = connection.getFriend();
                     return new ConnectionDTO(friend.getId(), friend.getUsername(), friend.getBalance());
                 }).collect(Collectors.toSet());
+
         userDTO.setConnections(connections);
+
         return userDTO;
     }
-
 }
 

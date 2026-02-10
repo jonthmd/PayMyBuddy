@@ -27,8 +27,11 @@ public class ConnectionController {
 
     @GetMapping("/connections")
     public String connection(Model model) {
+
         model.addAttribute("addConnectionDTO", new AddConnectionDTO());
+
         log.info("Adding connections");
+
         return "connections";
     }
 
@@ -38,9 +41,11 @@ public class ConnectionController {
         try {
             connectionService.createConnection(principal.getName(), addConnectionDTO.getEmail());
             redirectAttributes.addFlashAttribute("message", "Contact ajouté !");
+
         } catch (ContactAlreadyAddedException | ImpossibleConnectionException | ContactNotFoundException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
+
         return "redirect:/connections";
     }
 

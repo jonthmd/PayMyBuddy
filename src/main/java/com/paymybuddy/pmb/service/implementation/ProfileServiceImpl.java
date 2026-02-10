@@ -1,5 +1,6 @@
 package com.paymybuddy.pmb.service.implementation;
 
+import com.paymybuddy.pmb.dto.ProfileDTO;
 import com.paymybuddy.pmb.exceptions.InvalidPasswordException;
 import com.paymybuddy.pmb.model.User;
 import com.paymybuddy.pmb.repository.UserRepository;
@@ -18,6 +19,21 @@ public class ProfileServiceImpl implements ProfileService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
+    /**
+     * @param username The username of the current user.
+     * @return The user profile.
+     */
+    @Override
+    public ProfileDTO getProfile(String username) {
+
+        User user = userRepository.findByUsername(username);
+
+        ProfileDTO profileDTO = new ProfileDTO();
+        profileDTO.setUsername(user.getUsername());
+        profileDTO.setEmail(user.getEmail());
+
+        return profileDTO;
+    }
 
     /**
      * @param username The username of the current user.
@@ -26,13 +42,13 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public void updatePassword(String username, String password) {
 
-        if (password==null || password.isEmpty()) {
+        if (password == null || password.isEmpty()) {
             throw new InvalidPasswordException("Mot de passe invalide.");
         }
 
         User user = userRepository.findByUsername(username);
         user.setPassword(bCryptPasswordEncoder.encode(password));
-        userRepository.save(user);
 
+        userRepository.save(user);
     }
 }

@@ -22,7 +22,6 @@ public class TransactionServiceImpl implements TransactionService {
     private final TransactionMapper transactionMapper;
     private final UserRepository userRepository;
 
-
     public TransactionServiceImpl(TransactionRepository transactionRepository, TransactionMapper transactionMapper, UserRepository userRepository) {
         this.transactionRepository = transactionRepository;
         this.transactionMapper = transactionMapper;
@@ -58,7 +57,6 @@ public class TransactionServiceImpl implements TransactionService {
 
         transactionRepository.save(transaction);
         userRepository.save(user);
-
     }
 
     /**
@@ -95,7 +93,6 @@ public class TransactionServiceImpl implements TransactionService {
         transaction.setDescription("Paiement à " + receiver.getUsername() + " : " + description);
 
         transactionRepository.save(transaction);
-
     }
 
     /**

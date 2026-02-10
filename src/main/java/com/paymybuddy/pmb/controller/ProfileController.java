@@ -24,21 +24,28 @@ public class ProfileController {
     }
 
     @GetMapping("/profile")
-    public String profile(Model model) {
-        model.addAttribute("profileDTO", new ProfileDTO());
+    public String profile(Model model, Principal principal) {
+
+        ProfileDTO profileDTO = profileService.getProfile(principal.getName());
+        model.addAttribute("profileDTO", profileDTO);
+
         log.info("Profile view");
+
         return "profile";
     }
 
     @PostMapping("/profile")
     public String updateProfile(@ModelAttribute ProfileDTO profileDTO, Model model, Principal principal, RedirectAttributes redirectAttributes) {
+
         try {
             profileService.updatePassword(principal.getName(), profileDTO.getPassword());
             redirectAttributes.addFlashAttribute("message", "Mot de passe modifié !");
-        } catch (InvalidPasswordException e) {
+        }
+        catch (InvalidPasswordException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
             model.addAttribute("profileDTO", new ProfileDTO());
         }
+
         return "redirect:/profile";
     }
 }

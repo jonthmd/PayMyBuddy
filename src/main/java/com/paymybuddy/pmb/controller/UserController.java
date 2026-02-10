@@ -24,25 +24,34 @@ public class UserController {
 
     @GetMapping("/register")
     public String registerForm(Model model) {
+
         model.addAttribute("user", new RegisterDTO());
+
         log.info("Registering form");
+
         return "register";
     }
 
     @PostMapping("/register")
     public String register(@ModelAttribute("user") RegisterDTO registerDTO, Model model) {
+
         if (userRepository.existsByEmail(registerDTO.getEmail())) {
             model.addAttribute("error", "Email déjà utilisé.");
+
             return "register";
         }
+
         userService.createUser(registerDTO);
         log.info("Registered user: {}", registerDTO);
+
         return "redirect:/login";
     }
 
     @GetMapping("/login")
     public String loginForm() {
+
         log.info("Login form");
+
         return "login";
     }
 
