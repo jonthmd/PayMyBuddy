@@ -8,6 +8,9 @@ import com.paymybuddy.pmb.service.ProfileService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/**
+ *Implementations of the profile service interface.
+ */
 @Service
 public class ProfileServiceImpl implements ProfileService {
 

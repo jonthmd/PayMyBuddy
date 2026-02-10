@@ -15,6 +15,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ *Implementations of the transaction service interface.
+ */
 @Service
 public class TransactionServiceImpl implements TransactionService {
 

@@ -9,6 +9,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * Spring Security configuration to set authentication and authorization parameters on specific pages of the app.
+ */
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig {
@@ -19,8 +22,15 @@ public class SpringSecurityConfig {
         this.customUserDetailsService = customUserDetailsService;
     }
 
+    /**
+     * Bean of the filter chain.
+     *
+     * @param http The parameter used to configure the web security.
+     * @return The configuration of the filter chain.
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) {
+
         return http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login", "/register", "/css/**", "/js/**", "/images/**")
@@ -38,11 +48,19 @@ public class SpringSecurityConfig {
                 .build();
     }
 
+    /**
+     * Bean of the authentication rules.
+     *
+     * @param http                  The parameter used to configure the web security.
+     * @param bCryptPasswordEncoder The password encoder.
+     * @return The authentication configuration.
+     */
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder) {
+
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
         authenticationManagerBuilder.userDetailsService(customUserDetailsService).passwordEncoder(bCryptPasswordEncoder);
+
         return authenticationManagerBuilder.build();
     }
-
 }

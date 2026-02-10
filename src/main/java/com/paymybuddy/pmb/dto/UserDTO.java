@@ -18,6 +18,8 @@ public class UserDTO {
     private Long id;
     private String username;
     private String email;
+
+
     private BigDecimal balance;
     private Set<ConnectionDTO> connections;
 

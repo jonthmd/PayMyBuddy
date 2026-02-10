@@ -10,6 +10,9 @@ import com.paymybuddy.pmb.repository.UserRepository;
 import com.paymybuddy.pmb.service.ConnectionService;
 import org.springframework.stereotype.Service;
 
+/**
+ *Implementation of the connection service interface.
+ */
 @Service
 public class ConnectionServiceImpl implements ConnectionService {
 

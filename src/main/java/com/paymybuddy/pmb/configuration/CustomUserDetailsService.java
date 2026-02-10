@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Spring Security configuration used to load user during authentication.
+ */
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
@@ -21,17 +24,31 @@ public class CustomUserDetailsService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-
+    /**
+     * Loads user by the username.
+     *
+     * @param username The user username.
+     * @return A user with authorities.
+     * @throws UsernameNotFoundException If the user is not found.
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
         com.paymybuddy.pmb.model.User user = userRepository.findByUsername(username);
+
         return new User(user.getUsername(), user.getPassword(), getGrantedAuthorities());
     }
 
+    /**
+     * Returns authorities of the user.
+     *
+     * @return A list of authorities.
+     */
     private List<GrantedAuthority> getGrantedAuthorities() {
+
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+
         return authorities;
     }
-
 }

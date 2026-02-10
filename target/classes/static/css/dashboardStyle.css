@@ -15,6 +15,8 @@ body {
 .logout {
     background: none;
     border: none;
+    color: inherit;
+    font: inherit;
 }
 
 .logout:hover {

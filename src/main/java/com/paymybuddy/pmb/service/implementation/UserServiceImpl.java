@@ -14,6 +14,9 @@ import java.math.BigDecimal;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ *Implementations of the user service interface.
+ */
 @Service
 public class UserServiceImpl implements UserService {
 
