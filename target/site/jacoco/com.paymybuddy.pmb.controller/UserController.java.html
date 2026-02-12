@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Pay My Buddy</a> &gt; <a href="index.source.html" class="el_package">com.paymybuddy.pmb.controller</a> &gt; <span class="el_source">UserController.java</span></div><h1>UserController.java</h1><pre class="source lang-java linenums">package com.paymybuddy.pmb.controller;
+
+import com.paymybuddy.pmb.dto.RegisterDTO;
+import com.paymybuddy.pmb.repository.UserRepository;
+import com.paymybuddy.pmb.service.UserService;
+import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+<span class="fc" id="L15">@Slf4j</span>
+@Controller
+public class UserController {
+
+    private final UserService userService;
+    private final UserRepository userRepository;
+
+<span class="fc" id="L22">    public UserController(UserService userService, UserRepository userRepository) {</span>
+<span class="fc" id="L23">        this.userService = userService;</span>
+<span class="fc" id="L24">        this.userRepository = userRepository;</span>
+<span class="fc" id="L25">    }</span>
+
+    /**
+     * Displays the register page.
+     *
+     * @param model Model used to transmit data.
+     * @return The register view.
+     */
+    @GetMapping(&quot;/register&quot;)
+    public String registerForm(Model model) {
+
+<span class="fc" id="L36">        model.addAttribute(&quot;user&quot;, new RegisterDTO());</span>
+
+<span class="fc" id="L38">        log.info(&quot;Registering form&quot;);</span>
+
+<span class="fc" id="L40">        return &quot;register&quot;;</span>
+    }
+
+    /**
+     * Validates the registration.
+     *
+     * @param registerDTO   DTO used to represent a user data for registration.
+     * @param bindingResult The data validation, displays error message if any.
+     * @param model         Model used to transmit data.
+     * @return A redirect to the register view.
+     */
+    @PostMapping(&quot;/register&quot;)
+    public String register(@Valid @ModelAttribute(&quot;user&quot;) RegisterDTO registerDTO, BindingResult bindingResult, Model model) {
+
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        if (bindingResult.hasErrors()) {</span>
+<span class="fc" id="L55">            model.addAttribute(&quot;error&quot;, bindingResult.getAllErrors().get(0).getDefaultMessage());</span>
+
+<span class="fc" id="L57">            return &quot;register&quot;;</span>
+        }
+
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        if (userRepository.existsByEmail(registerDTO.getEmail())) {</span>
+<span class="fc" id="L61">            model.addAttribute(&quot;error&quot;, &quot;Email déjà utilisé.&quot;);</span>
+
+<span class="fc" id="L63">            return &quot;register&quot;;</span>
+        }
+
+<span class="fc" id="L66">        userService.createUser(registerDTO);</span>
+<span class="fc" id="L67">        log.info(&quot;Registered user: {}&quot;, registerDTO);</span>
+
+<span class="fc" id="L69">        return &quot;redirect:/login&quot;;</span>
+    }
+
+    /**
+     * Displays the login page.
+     *
+     * @return The login view.
+     */
+    @GetMapping(&quot;/login&quot;)
+    public String loginForm() {
+
+<span class="fc" id="L80">        log.info(&quot;Login form&quot;);</span>
+
+<span class="fc" id="L82">        return &quot;login&quot;;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

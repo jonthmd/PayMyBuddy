@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProfileController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Pay My Buddy</a> &gt; <a href="index.source.html" class="el_package">com.paymybuddy.pmb.controller</a> &gt; <span class="el_source">ProfileController.java</span></div><h1>ProfileController.java</h1><pre class="source lang-java linenums">package com.paymybuddy.pmb.controller;
+
+import com.paymybuddy.pmb.dto.ProfileDTO;
+import com.paymybuddy.pmb.exceptions.InvalidPasswordException;
+import com.paymybuddy.pmb.service.ProfileService;
+import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.security.Principal;
+
+<span class="fc" id="L18">@Slf4j</span>
+@Controller
+public class ProfileController {
+
+    private final ProfileService profileService;
+
+<span class="fc" id="L24">    public ProfileController(ProfileService profileService) {</span>
+<span class="fc" id="L25">        this.profileService = profileService;</span>
+<span class="fc" id="L26">    }</span>
+
+    /**
+     * Displays the profile page.
+     *
+     * @param model     Model used to transmit data.
+     * @param principal The current logged user.
+     * @return The profile view.
+     */
+    @GetMapping(&quot;/profile&quot;)
+    public String profile(Model model, Principal principal) {
+
+<span class="fc" id="L38">        ProfileDTO profileDTO = profileService.getProfile(principal.getName());</span>
+<span class="fc" id="L39">        model.addAttribute(&quot;profileDTO&quot;, profileDTO);</span>
+
+<span class="fc" id="L41">        log.info(&quot;Profile view&quot;);</span>
+
+<span class="fc" id="L43">        return &quot;profile&quot;;</span>
+    }
+
+    /**
+     * Validates the profile update.
+     *
+     * @param profileDTO         DTO used to represent a user profile.
+     * @param bindingResult      The data validation, displays error message if any.
+     * @param principal          The current logged user.
+     * @param redirectAttributes Attributes used to display message after redirect.
+     * @return A redirect to the profile view.
+     */
+    @PostMapping(&quot;/profile&quot;)
+    public String updateProfile(@Valid @ModelAttribute ProfileDTO profileDTO, BindingResult bindingResult, Principal principal, RedirectAttributes redirectAttributes) {
+
+<span class="fc bfc" id="L58" title="All 2 branches covered.">        if (bindingResult.hasErrors()) {</span>
+<span class="fc" id="L59">            redirectAttributes.addFlashAttribute(&quot;error&quot;, bindingResult.getAllErrors().get(0).getDefaultMessage());</span>
+
+<span class="fc" id="L61">            return &quot;redirect:/profile&quot;;</span>
+        }
+
+        try {
+<span class="fc" id="L65">            profileService.updatePassword(principal.getName(), profileDTO.getPassword());</span>
+<span class="fc" id="L66">            redirectAttributes.addFlashAttribute(&quot;message&quot;, &quot;Mot de passe modifié !&quot;);</span>
+<span class="nc" id="L67">        } catch (InvalidPasswordException e) {</span>
+<span class="nc" id="L68">            redirectAttributes.addFlashAttribute(&quot;error&quot;, e.getMessage());</span>
+<span class="fc" id="L69">        }</span>
+
+<span class="fc" id="L71">        return &quot;redirect:/profile&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

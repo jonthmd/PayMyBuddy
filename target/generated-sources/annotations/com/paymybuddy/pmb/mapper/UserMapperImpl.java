@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-02-04T17:38:04+0100",
+    date = "2026-02-12T13:58:00+0100",
     comments = "version: 1.6.3, compiler: javac, environment: Java 21.0.9 (Oracle Corporation)"
 )
 @Component
@@ -66,7 +66,7 @@ public class UserMapperImpl implements UserMapper {
             return null;
         }
 
-        Set<ConnectionDTO> set1 = new LinkedHashSet<ConnectionDTO>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
+        Set<ConnectionDTO> set1 = LinkedHashSet.newLinkedHashSet( set.size() );
         for ( Connection connection : set ) {
             set1.add( connectionToConnectionDTO( connection ) );
         }
@@ -89,7 +89,7 @@ public class UserMapperImpl implements UserMapper {
             return null;
         }
 
-        Set<Connection> set1 = new LinkedHashSet<Connection>( Math.max( (int) ( set.size() / .75f ) + 1, 16 ) );
+        Set<Connection> set1 = LinkedHashSet.newLinkedHashSet( set.size() );
         for ( ConnectionDTO connectionDTO : set ) {
             set1.add( connectionDTOToConnection( connectionDTO ) );
         }
