@@ -48,13 +48,12 @@ public class ProfileController {
      *
      * @param profileDTO         DTO used to represent a user profile.
      * @param bindingResult      The data validation, displays error message if any.
-     * @param model              Model used to transmit data.
      * @param principal          The current logged user.
      * @param redirectAttributes Attributes used to display message after redirect.
      * @return A redirect to the profile view.
      */
     @PostMapping("/profile")
-    public String updateProfile(@Valid @ModelAttribute ProfileDTO profileDTO, BindingResult bindingResult, Model model, Principal principal, RedirectAttributes redirectAttributes) {
+    public String updateProfile(@Valid @ModelAttribute ProfileDTO profileDTO, BindingResult bindingResult, Principal principal, RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("error", bindingResult.getAllErrors().get(0).getDefaultMessage());
@@ -67,7 +66,6 @@ public class ProfileController {
             redirectAttributes.addFlashAttribute("message", "Mot de passe modifié !");
         } catch (InvalidPasswordException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
-            model.addAttribute("profileDTO", new ProfileDTO());
         }
 
         return "redirect:/profile";

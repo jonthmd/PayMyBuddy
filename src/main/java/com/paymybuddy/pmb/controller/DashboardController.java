@@ -62,16 +62,11 @@ public class DashboardController {
      * @param submitTransactionDTO DTO used to represent a transaction with a user.
      * @param bindingResult        The data validation, displays error message if any.
      * @param principal            The current logged user.
-     * @param model                Model used to transmit data.
      * @param redirectAttributes   Attributes used to display message after redirect.
      * @return A redirect to the dashboard view.
      */
     @PostMapping("/transaction")
-    public String submitTransaction(@Valid @ModelAttribute("transaction") SubmitTransactionDTO submitTransactionDTO, BindingResult bindingResult, Principal principal, Model model, RedirectAttributes redirectAttributes) {
-
-        UserDTO userDTO = userService.getUserByUsername(principal.getName());
-        Set<ConnectionDTO> connectionDTOSet = userDTO.getConnections();
-        List<TransactionDTO> transactionDTOList = transactionService.getTransactionsByUsername(principal.getName());
+    public String submitTransaction(@Valid @ModelAttribute("transaction") SubmitTransactionDTO submitTransactionDTO, BindingResult bindingResult, Principal principal, RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("error", bindingResult.getAllErrors().get(0).getDefaultMessage());
@@ -83,11 +78,6 @@ public class DashboardController {
             transactionService.createTransaction(submitTransactionDTO.getAmount(), principal.getName(), submitTransactionDTO.getReceiver(), submitTransactionDTO.getDescription());
         } catch (InsufficientBalanceException | InvalidAmountException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
-            model.addAttribute("user", userDTO);
-            model.addAttribute("connections", connectionDTOSet);
-            model.addAttribute("transactions", transactionDTOList);
-            model.addAttribute("submitTransactionDTO", new SubmitTransactionDTO());
-            model.addAttribute("balance", new WalletDTO());
         }
 
         return "redirect:/dashboard";
@@ -99,16 +89,11 @@ public class DashboardController {
      * @param walletDTO          DTO used to represent a deposit amount.
      * @param bindingResult      The data validation, displays error message if any.
      * @param principal          The current logged user.
-     * @param model              Model used to transmit data.
      * @param redirectAttributes Attributes used to display message after redirect.
      * @return A redirect to the dashboard view.
      */
     @PostMapping("/balance")
-    public String depositBalance(@Valid @ModelAttribute("balance") WalletDTO walletDTO, BindingResult bindingResult, Principal principal, Model model, RedirectAttributes redirectAttributes) {
-
-        UserDTO userDTO = userService.getUserByUsername(principal.getName());
-        Set<ConnectionDTO> connectionDTOSet = userDTO.getConnections();
-        List<TransactionDTO> transactionDTOList = transactionService.getTransactionsByUsername(principal.getName());
+    public String depositBalance(@Valid @ModelAttribute("balance") WalletDTO walletDTO, BindingResult bindingResult, Principal principal, RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("error", bindingResult.getAllErrors().get(0).getDefaultMessage());
@@ -120,11 +105,6 @@ public class DashboardController {
             transactionService.depositBalance(principal.getName(), walletDTO.getAmount());
         } catch (InvalidAmountException e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
-            model.addAttribute("user", userDTO);
-            model.addAttribute("connections", connectionDTOSet);
-            model.addAttribute("transactions", transactionDTOList);
-            model.addAttribute("submitTransactionDTO", new SubmitTransactionDTO());
-            model.addAttribute("balance", new WalletDTO());
         }
 
         return "redirect:/dashboard";
