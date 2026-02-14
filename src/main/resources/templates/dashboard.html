@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <title>Transaction</title>
     <link th:href="@{/css/dashboardStyle.css}" rel="stylesheet">
 </head>
-
 <body>
 
 <header>
     <nav>
-        <ul class="navbar">
-            <span>Pay My Buddy</span>
+        <div class="navbar">
+            <span class="logo">Pay My Buddy</span>
+
             <div class="menu">
                 <a class="transfer" th:href="@{/dashboard}">Transférer</a>
                 <a th:href="@{/profile}">Profil</a>
@@ -24,16 +23,13 @@
                     <button type="submit" class="logout">Se déconnecter</button>
                 </form>
             </div>
-        </ul>
+        </div>
     </nav>
 </header>
 
 <main>
-
     <section>
-
         <form class="balance" th:action="@{/balance}" method="post" th:object="${balance}">
-
             <div class="value">
                 <p> Solde disponible:</p>
                 <p th:text="${user.balance} + '€'">0 €</p>
