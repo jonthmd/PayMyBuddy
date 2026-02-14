@@ -37,16 +37,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public void createUser(RegisterDTO registerDTO) {
 
-<span class="nc" id="L40">            String password = bCryptPasswordEncoder.encode(registerDTO.getPassword());</span>
+<span class="fc" id="L40">            String password = bCryptPasswordEncoder.encode(registerDTO.getPassword());</span>
 
-<span class="nc" id="L42">            User user = new User();</span>
-<span class="nc" id="L43">            user.setUsername(registerDTO.getUsername());</span>
-<span class="nc" id="L44">            user.setEmail(registerDTO.getEmail());</span>
-<span class="nc" id="L45">            user.setPassword(password);</span>
-<span class="nc" id="L46">            user.setBalance(BigDecimal.ZERO);</span>
+<span class="fc" id="L42">            User user = new User();</span>
+<span class="fc" id="L43">            user.setUsername(registerDTO.getUsername());</span>
+<span class="fc" id="L44">            user.setEmail(registerDTO.getEmail());</span>
+<span class="fc" id="L45">            user.setPassword(password);</span>
+<span class="fc" id="L46">            user.setBalance(BigDecimal.ZERO);</span>
 
-<span class="nc" id="L48">            userRepository.save(user);</span>
-<span class="nc" id="L49">    }</span>
+<span class="fc" id="L48">            userRepository.save(user);</span>
+<span class="fc" id="L49">    }</span>
 
     /**
      * @param username Unique username of the user.
@@ -55,18 +55,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO getUserByUsername(String username) {
 
-<span class="nc" id="L58">        User user = userRepository.findByUsername(username);</span>
-<span class="nc" id="L59">        UserDTO userDTO = userMapper.userToUserDTO(user);</span>
+<span class="fc" id="L58">        User user = userRepository.findByUsername(username);</span>
+<span class="fc" id="L59">        UserDTO userDTO = userMapper.userToUserDTO(user);</span>
 
-<span class="nc" id="L61">        Set&lt;ConnectionDTO&gt; connections = user.getConnections().stream()</span>
-<span class="nc" id="L62">                .map(connection -&gt; {</span>
-<span class="nc" id="L63">                    User friend = connection.getFriend();</span>
-<span class="nc" id="L64">                    return new ConnectionDTO(friend.getId(), friend.getUsername(), friend.getBalance());</span>
-<span class="nc" id="L65">                }).collect(Collectors.toSet());</span>
+<span class="fc" id="L61">        Set&lt;ConnectionDTO&gt; connections = user.getConnections().stream()</span>
+<span class="fc" id="L62">                .map(connection -&gt; {</span>
+<span class="fc" id="L63">                    User friend = connection.getFriend();</span>
+<span class="fc" id="L64">                    return new ConnectionDTO(friend.getId(), friend.getUsername(), friend.getBalance());</span>
+<span class="fc" id="L65">                }).collect(Collectors.toSet());</span>
 
-<span class="nc" id="L67">        userDTO.setConnections(connections);</span>
+<span class="fc" id="L67">        userDTO.setConnections(connections);</span>
 
-<span class="nc" id="L69">        return userDTO;</span>
+<span class="fc" id="L69">        return userDTO;</span>
     }
 }
 

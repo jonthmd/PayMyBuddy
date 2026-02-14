@@ -21,6 +21,7 @@ class ConnectionRepositoryTest {
     @Test
     void existsByUserAndFriend() {
 
+        //GIVEN
         User user = new User();
         user.setUsername("jon");
         userRepository.save(user);
@@ -37,8 +38,10 @@ class ConnectionRepositoryTest {
         connection.setFriend(user2);
         connectionRepository.save(connection);
 
+        //WHEN
         boolean result = connectionRepository.existsByUserAndFriend(user, user2);
 
+        //THEN
         assertTrue(result);
     }
 }

@@ -29,13 +29,13 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public ProfileDTO getProfile(String username) {
 
-<span class="nc" id="L32">        User user = userRepository.findByUsername(username);</span>
+<span class="fc" id="L32">        User user = userRepository.findByUsername(username);</span>
 
-<span class="nc" id="L34">        ProfileDTO profileDTO = new ProfileDTO();</span>
-<span class="nc" id="L35">        profileDTO.setUsername(user.getUsername());</span>
-<span class="nc" id="L36">        profileDTO.setEmail(user.getEmail());</span>
+<span class="fc" id="L34">        ProfileDTO profileDTO = new ProfileDTO();</span>
+<span class="fc" id="L35">        profileDTO.setUsername(user.getUsername());</span>
+<span class="fc" id="L36">        profileDTO.setEmail(user.getEmail());</span>
 
-<span class="nc" id="L38">        return profileDTO;</span>
+<span class="fc" id="L38">        return profileDTO;</span>
     }
 
     /**
@@ -45,14 +45,14 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public void updatePassword(String username, String password) {
 
-<span class="nc bnc" id="L48" title="All 4 branches missed.">        if (password == null || password.isEmpty()) {</span>
-<span class="nc" id="L49">            throw new InvalidPasswordException(&quot;Mot de passe invalide.&quot;);</span>
+<span class="pc bpc" id="L48" title="1 of 4 branches missed.">        if (password == null || password.isEmpty()) {</span>
+<span class="fc" id="L49">            throw new InvalidPasswordException(&quot;Mot de passe invalide.&quot;);</span>
         }
 
-<span class="nc" id="L52">        User user = userRepository.findByUsername(username);</span>
-<span class="nc" id="L53">        user.setPassword(bCryptPasswordEncoder.encode(password));</span>
+<span class="fc" id="L52">        User user = userRepository.findByUsername(username);</span>
+<span class="fc" id="L53">        user.setPassword(bCryptPasswordEncoder.encode(password));</span>
 
-<span class="nc" id="L55">        userRepository.save(user);</span>
-<span class="nc" id="L56">    }</span>
+<span class="fc" id="L55">        userRepository.save(user);</span>
+<span class="fc" id="L56">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

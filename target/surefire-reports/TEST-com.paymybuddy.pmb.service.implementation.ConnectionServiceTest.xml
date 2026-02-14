@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.paymybuddy.pmb.repository.UserRepositoryTest" time="0.026" tests="3" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.paymybuddy.pmb.service.implementation.ConnectionServiceTest" time="0.036" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -48,6 +48,7 @@
     <property name="localRepository" value="/Users/jon/.m2/repository"/>
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
     <property name="java.io.tmpdir" value="/var/folders/dn/mxb0q57x6p71_dt_nwzl4v2c0000gn/T/"/>
+    <property name="com.zaxxer.hikari.pool_number" value="1"/>
     <property name="java.version" value="21.0.9"/>
     <property name="user.dir" value="/Users/jon/Desktop/OC/projet 06/PayMyBuddy"/>
     <property name="os.arch" value="aarch64"/>
@@ -65,25 +66,8 @@
     <property name="java.class.version" value="65.0"/>
     <property name="LOGGED_APPLICATION_NAME" value="[PMB] "/>
   </properties>
-  <testcase name="existsByEmail" classname="com.paymybuddy.pmb.repository.UserRepositoryTest" time="0.007">
-    <system-out><![CDATA[2026-02-14T08:45:26.769+01:00 DEBUG 42603 --- [PMB] [           main] org.hibernate.SQL                        : insert into users (balance,email,password,username,id_user) values (?,?,?,?,default)
-Hibernate: insert into users (balance,email,password,username,id_user) values (?,?,?,?,default)
-2026-02-14T08:45:26.771+01:00 DEBUG 42603 --- [PMB] [           main] org.hibernate.SQL                        : select u1_0.id_user from users u1_0 where u1_0.email=? fetch first ? rows only
-Hibernate: select u1_0.id_user from users u1_0 where u1_0.email=? fetch first ? rows only
-]]></system-out>
-  </testcase>
-  <testcase name="findByEmail" classname="com.paymybuddy.pmb.repository.UserRepositoryTest" time="0.006">
-    <system-out><![CDATA[2026-02-14T08:45:26.777+01:00 DEBUG 42603 --- [PMB] [           main] org.hibernate.SQL                        : insert into users (balance,email,password,username,id_user) values (?,?,?,?,default)
-Hibernate: insert into users (balance,email,password,username,id_user) values (?,?,?,?,default)
-2026-02-14T08:45:26.779+01:00 DEBUG 42603 --- [PMB] [           main] org.hibernate.SQL                        : select u1_0.id_user,u1_0.balance,u1_0.email,u1_0.password,u1_0.username from users u1_0 where u1_0.email=?
-Hibernate: select u1_0.id_user,u1_0.balance,u1_0.email,u1_0.password,u1_0.username from users u1_0 where u1_0.email=?
-]]></system-out>
-  </testcase>
-  <testcase name="findByUsername" classname="com.paymybuddy.pmb.repository.UserRepositoryTest" time="0.006">
-    <system-out><![CDATA[2026-02-14T08:45:26.784+01:00 DEBUG 42603 --- [PMB] [           main] org.hibernate.SQL                        : insert into users (balance,email,password,username,id_user) values (?,?,?,?,default)
-Hibernate: insert into users (balance,email,password,username,id_user) values (?,?,?,?,default)
-2026-02-14T08:45:26.786+01:00 DEBUG 42603 --- [PMB] [           main] org.hibernate.SQL                        : select u1_0.id_user,u1_0.balance,u1_0.email,u1_0.password,u1_0.username from users u1_0 where u1_0.username=?
-Hibernate: select u1_0.id_user,u1_0.balance,u1_0.email,u1_0.password,u1_0.username from users u1_0 where u1_0.username=?
-]]></system-out>
-  </testcase>
+  <testcase name="createConnectionContactAlreadyExists" classname="com.paymybuddy.pmb.service.implementation.ConnectionServiceTest" time="0.033"/>
+  <testcase name="createConnection" classname="com.paymybuddy.pmb.service.implementation.ConnectionServiceTest" time="0.001"/>
+  <testcase name="createConnectionContactNotFound" classname="com.paymybuddy.pmb.service.implementation.ConnectionServiceTest" time="0.0"/>
+  <testcase name="createConnectionImpossibleConnection" classname="com.paymybuddy.pmb.service.implementation.ConnectionServiceTest" time="0.0"/>
 </testsuite>

@@ -6,4 +6,7 @@
 /Users/jon/Desktop/OC/projet 06/PayMyBuddy/src/test/java/com/paymybuddy/pmb/repository/ConnectionRepositoryTest.java
 /Users/jon/Desktop/OC/projet 06/PayMyBuddy/src/test/java/com/paymybuddy/pmb/repository/TransactionRepositoryTest.java
 /Users/jon/Desktop/OC/projet 06/PayMyBuddy/src/test/java/com/paymybuddy/pmb/repository/UserRepositoryTest.java
+/Users/jon/Desktop/OC/projet 06/PayMyBuddy/src/test/java/com/paymybuddy/pmb/service/implementation/ConnectionServiceTest.java
+/Users/jon/Desktop/OC/projet 06/PayMyBuddy/src/test/java/com/paymybuddy/pmb/service/implementation/ProfileServiceImplTest.java
+/Users/jon/Desktop/OC/projet 06/PayMyBuddy/src/test/java/com/paymybuddy/pmb/service/implementation/TransactionServiceImplTest.java
 /Users/jon/Desktop/OC/projet 06/PayMyBuddy/src/test/java/com/paymybuddy/pmb/service/implementation/UserServiceImplTest.java

@@ -46,7 +46,7 @@ public class TransactionServiceImpl implements TransactionService {
 
         User user = userRepository.findByUsername(username);
 
-        BigDecimal commission = amount.multiply(COMMISSION); //amount is null
+        BigDecimal commission = amount.multiply(COMMISSION);
         BigDecimal total = amount.subtract(commission);
 
         user.setBalance(user.getBalance().add(total));

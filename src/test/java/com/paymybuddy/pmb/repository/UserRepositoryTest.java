@@ -16,42 +16,51 @@ class UserRepositoryTest {
     @Test
     void findByUsername() {
 
+       //GIVEN
        User user = new User();
        user.setUsername("jon");
        user.setEmail("jon@test.com");
        user.setPassword("jon123");
        userRepository.save(user);
 
+       //WHEN
        User result = userRepository.findByUsername(user.getUsername());
 
+       //THEN
        assertEquals(user.getUsername(), result.getUsername());
     }
 
     @Test
     void findByEmail() {
 
+        //GIVEN
         User user = new User();
         user.setUsername("jon");
         user.setEmail("jon@test.com");
         user.setPassword("jon123");
         userRepository.save(user);
 
+        //WHEN
         User result = userRepository.findByEmail(user.getEmail());
 
+        //THEN
         assertEquals(user.getEmail(), result.getEmail());
     }
 
     @Test
     void existsByEmail() {
 
+        //GIVEN
         User user = new User();
         user.setUsername("jon");
         user.setEmail("jon@test.com");
         user.setPassword("jon123");
         userRepository.save(user);
 
+        //WHEN
         boolean result = userRepository.existsByEmail(user.getEmail());
 
+        //THEN
         assertTrue(result);
     }
 }

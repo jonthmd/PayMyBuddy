@@ -24,6 +24,7 @@ class TransactionRepositoryTest {
     @Test
     void findBySenderUsernameOrReceiverUsername() {
 
+        //GIVEN
         User sender = new User();
         sender.setUsername("noj");
         userRepository.save(sender);
@@ -40,8 +41,10 @@ class TransactionRepositoryTest {
         transaction.setDescription("test");
         transactionRepository.save(transaction);
 
+        //WHEN
         List<Transaction> result = transactionRepository.findBySenderUsernameOrReceiverUsername("noj", "jon");
 
+        //THEN
         assertEquals(1, result.size());
         assertEquals("test", result.getFirst().getDescription());
     }
