@@ -16,7 +16,7 @@ Required software :
 - Java 21.0.9
 - Maven 3.9.11
 - MySQL 9.5.0
-- MySQL Workbench 8.0.45
+- MySQL Workbench 8.0.45 if necessary
 
 ### Installing
 
@@ -32,9 +32,9 @@ Required software :
 
 ### Running the app
 
-1 - Run the app ApiApplication.java via your IDE.
+1 - Run the app PayMyBuddyApplication.java via your IDE.
 
-2 - On your browser, go to http://localhost:8080/swagger-ui/index.html.
+2 - On your browser, go to http://localhost:8080/.
 
 OR 
 
@@ -44,7 +44,7 @@ Follow these steps :
 
 2 - Enter the command "mvn spring-boot:run".
 
-3 - On your browser, go to http://localhost:8080/swagger-ui/index.html.
+3 - On your browser, go to http://localhost:8080/.
 
 ### Testing the app
 
@@ -52,4 +52,16 @@ Via your IDE, right-click on the root folder and select "Run all tests".
 
 OR
 
-Enter the command "mvn clean verify" on the terminal.
+Enter the command "mvn clean test" on the terminal.
+
+## BDD
+
+The SQL script is available in:
+docs/PMB.sql
+
+## PMD
+
+![Physical Model Data of the project](docs/MPD.png)
+
+
+
