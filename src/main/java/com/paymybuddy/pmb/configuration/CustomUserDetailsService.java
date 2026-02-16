@@ -34,7 +34,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        com.paymybuddy.pmb.model.User user = userRepository.findByUsername(username);
+        com.paymybuddy.pmb.model.User user = userRepository.findByEmail(username);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("L'email "  + username + " est inexistant.");
+        }
 
         return new User(user.getUsername(), user.getPassword(), getGrantedAuthorities());
     }

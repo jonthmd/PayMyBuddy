@@ -1,9 +1,0 @@
-com/paymybuddy/pmb/controller/UserControllerTest.class
-com/paymybuddy/pmb/controller/ProfileControllerTest.class
-com/paymybuddy/pmb/repository/ConnectionRepositoryTest.class
-com/paymybuddy/pmb/controller/DashboardControllerTest.class
-com/paymybuddy/pmb/repository/TransactionRepositoryTest.class
-com/paymybuddy/pmb/controller/ConnectionControllerTest.class
-com/paymybuddy/pmb/service/implementation/UserServiceImplTest.class
-com/paymybuddy/pmb/repository/UserRepositoryTest.class
-com/paymybuddy/pmb/PayMyBuddyApplicationTests.class

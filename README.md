@@ -54,6 +54,13 @@ OR
 
 Enter the command "mvn clean test" on the terminal.
 
+### Reports
+
+For Jacoco report, enter the command "mvn test" on the terminal.
+
+For Surefire report, enter the command "mvn surefire-report:report" on the terminal.
+
+
 ## BDD
 
 The SQL script is available in:
