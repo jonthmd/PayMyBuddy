@@ -14,6 +14,7 @@ for development or testing.
 Required software :
 
 - Java 21.0.9
+- Spring 4.0.0
 - Maven 3.9.11
 - MySQL 9.5.0
 - MySQL Workbench 8.0.45 if necessary
@@ -29,6 +30,10 @@ Required software :
 4 - Install MySQL Workbench : https://dev.mysql.com/downloads/workbench/.
 
 3 - Clone the project on your local machine.
+
+### Importing the DB
+
+1 - Create a new mySQL database using the script "PMB.sql" available in the 'docs' folder.
 
 ### Running the app
 
@@ -59,12 +64,6 @@ Enter the command "mvn clean test" on the terminal.
 For Jacoco report, enter the command "mvn test" on the terminal.
 
 For Surefire report, enter the command "mvn surefire-report:report" on the terminal.
-
-
-## BDD
-
-The SQL script is available in:
-docs/PMB.sql
 
 ## PMD
 
