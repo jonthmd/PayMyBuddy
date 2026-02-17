@@ -10,6 +10,7 @@ import com.paymybuddy.pmb.repository.TransactionRepository;
 import com.paymybuddy.pmb.repository.UserRepository;
 import com.paymybuddy.pmb.service.TransactionService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -38,6 +39,7 @@ public class TransactionServiceImpl implements TransactionService {
      * @param amount   The amount to added to the balance.
      */
     @Override
+    @Transactional
     public void depositBalance(String username, BigDecimal amount) {
 
         if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
@@ -69,6 +71,7 @@ public class TransactionServiceImpl implements TransactionService {
      * @param description      The description of the transaction.
      */
     @Override
+    @Transactional
     public void createTransaction(BigDecimal amount, String senderUsername, String receiverUsername, String description) {
 
         if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
